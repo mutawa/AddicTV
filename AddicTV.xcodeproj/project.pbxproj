@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */; };
-		E0D32D0122CDFF8F00A9BACE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32D0022CDFF8F00A9BACE /* ViewController.swift */; };
+		E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */; };
 		E0D32D0422CDFF8F00A9BACE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D32D0222CDFF8F00A9BACE /* Main.storyboard */; };
 		E0D32D0622CDFF9100A9BACE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0D32D0522CDFF9100A9BACE /* Assets.xcassets */; };
 		E0D32D0922CDFF9100A9BACE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D32D0722CDFF9100A9BACE /* LaunchScreen.storyboard */; };
@@ -17,7 +17,7 @@
 /* Begin PBXFileReference section */
 		E0D32CFB22CDFF8F00A9BACE /* AddicTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddicTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E0D32D0022CDFF8F00A9BACE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		E0D32D0322CDFF8F00A9BACE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E0D32D0522CDFF9100A9BACE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0D32D0822CDFF9100A9BACE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,14 +54,30 @@
 		E0D32CFD22CDFF8F00A9BACE /* AddicTV */ = {
 			isa = PBXGroup;
 			children = (
+				E0D32D1122CE000500A9BACE /* View */,
+				E0D32D1022CDFFBD00A9BACE /* Supporting Files */,
+				E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */,
+			);
+			path = AddicTV;
+			sourceTree = "<group>";
+		};
+		E0D32D1022CDFFBD00A9BACE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */,
-				E0D32D0022CDFF8F00A9BACE /* ViewController.swift */,
-				E0D32D0222CDFF8F00A9BACE /* Main.storyboard */,
 				E0D32D0522CDFF9100A9BACE /* Assets.xcassets */,
 				E0D32D0722CDFF9100A9BACE /* LaunchScreen.storyboard */,
 				E0D32D0A22CDFF9100A9BACE /* Info.plist */,
 			);
-			path = AddicTV;
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E0D32D1122CE000500A9BACE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E0D32D0222CDFF8F00A9BACE /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0D32D0122CDFF8F00A9BACE /* ViewController.swift in Sources */,
+				E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */,
 				E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +301,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z5WVWE62TT;
 				INFOPLIST_FILE = AddicTV/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +320,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z5WVWE62TT;
 				INFOPLIST_FILE = AddicTV/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
