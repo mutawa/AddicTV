@@ -36,7 +36,11 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        TVMazeAPI.shared.search(for: "prison break") { errorString in
+            if errorString != nil {
+                print(errorString!)
+            }
+        }
     }
 }
 

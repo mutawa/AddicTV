@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0A0FB5B22CE1AB20061CC42 /* TVMazeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */; };
+		E0A0FB5D22CE22720061CC42 /* TVMazeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */; };
 		E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */; };
 		E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */; };
 		E0D32D0422CDFF8F00A9BACE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D32D0222CDFF8F00A9BACE /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeAPI.swift; sourceTree = "<group>"; };
+		E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeResult.swift; sourceTree = "<group>"; };
 		E0D32CFB22CDFF8F00A9BACE /* AddicTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddicTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -46,6 +50,8 @@
 		E0A0FB5922CE19730061CC42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */,
+				E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,7 +174,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */,
+				E0A0FB5B22CE1AB20061CC42 /* TVMazeAPI.swift in Sources */,
 				E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */,
+				E0A0FB5D22CE22720061CC42 /* TVMazeResult.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +325,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z5WVWE62TT;
 				INFOPLIST_FILE = AddicTV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -336,7 +344,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z5WVWE62TT;
 				INFOPLIST_FILE = AddicTV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
