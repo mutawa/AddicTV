@@ -19,8 +19,8 @@ class SearchViewController: UIViewController {
         searchController.searchBar.delegate = self
         
         DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-            print("focus")
-            self.searchController.setNeedsFocusUpdate()
+            self.searchController.searchBar.placeholder = "Search any TV Show"
+            
             self.navigationItem.hidesSearchBarWhenScrolling = false
             
         }
@@ -42,7 +42,7 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

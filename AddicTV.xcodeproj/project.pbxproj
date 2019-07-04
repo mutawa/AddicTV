@@ -35,6 +35,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E0A0FB5822CE19620061CC42 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E0A0FB5922CE19730061CC42 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E0D32CF222CDFF8F00A9BACE = {
 			isa = PBXGroup;
 			children = (
@@ -54,9 +69,10 @@
 		E0D32CFD22CDFF8F00A9BACE /* AddicTV */ = {
 			isa = PBXGroup;
 			children = (
+				E0A0FB5922CE19730061CC42 /* Model */,
 				E0D32D1122CE000500A9BACE /* View */,
+				E0A0FB5822CE19620061CC42 /* Controller */,
 				E0D32D1022CDFFBD00A9BACE /* Supporting Files */,
-				E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */,
 			);
 			path = AddicTV;
 			sourceTree = "<group>";
