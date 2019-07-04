@@ -9,7 +9,10 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-
+    var searchResults = [TVMazeShow]()
+    
+    @IBOutlet weak var tableView:UITableView!
+    
     let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,31 +39,38 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        TVMazeAPI.shared.search(for: "prison break") { errorString in
+        TVMazeAPI.shared.search(for: searchText) { shows,errorString in
             if errorString != nil {
                 print(errorString!)
             }
+            guard let shows=shows else { return }
+            self.searchResults = shows
+            self.tableView.reloadData()
         }
     }
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return searchResults.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell")!
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TVCell else { return TVCell() }
         
-        cell.textLabel?.text = "\(indexPath)"
+        cell.show = searchResults[indexPath.row]
         
+    
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
     
 }
 

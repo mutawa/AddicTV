@@ -10,7 +10,7 @@ import Foundation
 
 struct TVMazeResult:Codable {
     let score:Float
-    let show:[TVMazeShow]
+    let show:TVMazeShow
     enum codingKeys:String,CodingKey {
         case score,show
     }
@@ -22,11 +22,11 @@ struct TVMazeShow:Codable {
     let url:String
     let name:String
     let language:String
-    //let genres:[String]
-    //let images:[TVMazePhoto]?
-    //let externals:[TVMazeExternal]
+    let genres:[String]
+    let image:TVMazeImage?
+    let externals:TVMazeExternal
     enum codingKeys:String,CodingKey {
-        case id,url,name,language  //,genres,images,externals
+        case id,url,name,language,genres,images,externals
     }
     
 }
@@ -40,10 +40,17 @@ struct TVMazeExternal:Codable {
     }
 }
 
-struct TVMazePhoto:Codable {
-    let medium:String?
-    let original:String?
+struct TVMazeImage:Codable {
+    let medium:String
+    
+    let original:String
+    
+    var urlMedium:String {
+        return medium.replacingOccurrences(of: "http://", with: "https://", options: .literal, range: nil)
+        
+    }
     enum codingKeys: String, CodingKey {
         case medium, original
     }
 }
+

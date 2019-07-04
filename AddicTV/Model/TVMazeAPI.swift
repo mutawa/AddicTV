@@ -32,24 +32,53 @@ class TVMazeAPI {
         }
     }
     
-    func search(for title:String, callback: ((String?)->())?=nil) {
-        let url = endPoint.search(title).urlString
-        URLSession.shared.dataTask(with: URL(string: url)!) { data,response,error in
-            guard error==nil else { callback?("Could not call API. \(error!.localizedDescription)\n\(url)"); return }
-            guard let data = data else { callback?("no data"); return }
+    func search(for title:String, callback: (([TVMazeShow]?,String?)->())?=nil) {
+        let urlString = endPoint.search(title).urlString
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data,response,error in
+            guard error==nil else { callback?(nil,"Could not call API. \(error!.localizedDescription)\n\(url)"); return }
+            guard let data = data else { callback?(nil,"no data"); return }
             
             print(String(bytes: data, encoding: .utf8)!)
             
             let decoder = JSONDecoder()
             do {
-                let result = try decoder.decode([TVMazeResult].self, from: data)
-                print("we have \(result.count)")
+                let results = try decoder.decode([TVMazeResult].self, from: data)
+                var shows = [TVMazeShow]()
+                for result in results {
+                    
+                    shows.append(result.show)
+                }
+                DispatchQueue.main.async {
+                    callback?(shows,nil)
+                }
+                
+                
             } catch {
-                print("error: \(error.localizedDescription)")
+                callback?(nil, "error: \(error.localizedDescription)")
             }
             
             
             
         }.resume()
     }
+    
+    func getImage(urlString: String, callback: ((Data?,Error?)->())?=nil) {
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) { data,response,error in
+                
+                
+                DispatchQueue.main.async {
+                    guard error==nil else { callback?(nil,error); return }
+                    guard let data = data else { callback?(nil,nil); return }
+                    callback?(data,nil)
+                    
+                }
+                
+                
+            }.resume()
+            
+        }
+    }
+    
 }
