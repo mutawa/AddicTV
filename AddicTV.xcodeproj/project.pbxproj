@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E03F4F0022D2069900484FEA /* FavioritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F4EFF22D2069900484FEA /* FavioritesViewController.swift */; };
 		E04F868A22D1C1FB0003FFE3 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F868922D1C1FB0003FFE3 /* ResultViewController.swift */; };
 		E0A0FB5B22CE1AB20061CC42 /* TVMazeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */; };
 		E0A0FB5D22CE22720061CC42 /* TVMazeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E03F4EFF22D2069900484FEA /* FavioritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavioritesViewController.swift; sourceTree = "<group>"; };
 		E04F868922D1C1FB0003FFE3 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeAPI.swift; sourceTree = "<group>"; };
 		E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeResult.swift; sourceTree = "<group>"; };
@@ -46,6 +48,7 @@
 		E0A0FB5822CE19620061CC42 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E03F4EFF22D2069900484FEA /* FavioritesViewController.swift */,
 				E04F868922D1C1FB0003FFE3 /* ResultViewController.swift */,
 				E0B695BF22CE473D00ED0616 /* TVCell.swift */,
 				E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */,
@@ -183,6 +186,7 @@
 				E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */,
 				E0A0FB5B22CE1AB20061CC42 /* TVMazeAPI.swift in Sources */,
 				E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */,
+				E03F4F0022D2069900484FEA /* FavioritesViewController.swift in Sources */,
 				E0B695C022CE473D00ED0616 /* TVCell.swift in Sources */,
 				E04F868A22D1C1FB0003FFE3 /* ResultViewController.swift in Sources */,
 				E0A0FB5D22CE22720061CC42 /* TVMazeResult.swift in Sources */,

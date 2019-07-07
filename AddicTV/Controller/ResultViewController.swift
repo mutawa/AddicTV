@@ -10,32 +10,50 @@ import UIKit
 import WebKit
 
 class ResultViewController: UIViewController {
-    var show:TVMazeShow!
+    var show:TVMazeShow! {
+        didSet {
+            imageView?.image = nil
+            configureUI()
+        }
+    }
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView?
     
-    @IBOutlet weak var labelView: UILabel!
     
-    @IBOutlet weak var textField: UITextView!
+    
+    @IBOutlet weak var summaryTextField: UITextView!
     
     
     override func viewDidLoad() {
-        //configureUI()
+        configureUI()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToMyShows))
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if imageView?.image == nil {
+            configureUI()
+        }
     }
     
-    func configureUI() {
-        imageView.image = UIImage(named: "placeholder")
-        if let urlString = show.image?.urlMedium {
-            TVMazeAPI.shared.getImage(urlString: urlString) { [weak self] data,error in
-                guard error==nil else { return }
-                guard let data=data else { return }
-                
-                self?.imageView.image = UIImage(data: data)
-            }
-        }
-        textField.text = show.summary
+    @objc func addToMyShows() {
         
-        //labelView.text = show.summary
+    }
+    func configureUI() {
+        
+        // only start fetching when the view is visible to the user
+        if view.window != nil {
+            if let urlString = show.image?.urlMedium {
+                TVMazeAPI.shared.getImage(urlString: urlString) { [weak self] data,error in
+                    guard error==nil else { self?.imageView?.image = UIImage(named: "placeholder");  return }
+                    guard let data=data else { return }
+                    
+                    self?.imageView?.image = UIImage(data: data)
+                }
+            }
+            summaryTextField.text = show.summary
+           
+        }
+       
+
     }
     
 }
