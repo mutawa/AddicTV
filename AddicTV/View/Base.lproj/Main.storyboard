@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Begin-->
+        <!--Search TV Shows-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="SearchViewController" customModule="AddicTV" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,12 +35,23 @@
                                                         <constraint firstAttribute="width" secondItem="j9n-1g-aic" secondAttribute="height" multiplier="1:1" id="OXl-bU-YZu"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-wz-UV1">
-                                                    <rect key="frame" x="96.5" y="34" width="238.5" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="xRm-oY-4eO">
+                                                    <rect key="frame" x="96.5" y="23.5" width="238.5" height="42"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQZ-wz-UV1">
+                                                            <rect key="frame" x="0.0" y="0.0" width="238.5" height="21.5"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJ9-Uh-Nxd" userLabel="Subtitle Label">
+                                                            <rect key="frame" x="0.0" y="21.5" width="238.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                         </stackView>
                                     </subviews>
@@ -52,6 +63,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="subtitleLabel" destination="pJ9-Uh-Nxd" id="bCU-hd-RkD"/>
                                     <outlet property="thumbnailImage" destination="j9n-1g-aic" id="nWr-Me-Ycf"/>
                                     <outlet property="titleLabel" destination="qQZ-wz-UV1" id="iwJ-f1-PPu"/>
                                 </connections>
@@ -63,7 +75,7 @@
                             <outlet property="delegate" destination="BYZ-38-t0r" id="X1B-5M-iMC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Begin" id="Tef-Ov-gbr"/>
+                    <navigationItem key="navigationItem" title="Search TV Shows" id="Tef-Ov-gbr"/>
                     <connections>
                         <outlet property="tableView" destination="jyD-lh-3Je" id="ycb-qA-Rz8"/>
                     </connections>

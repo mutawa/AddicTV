@@ -20,9 +20,11 @@ class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
         
         DispatchQueue.main.asyncAfter(deadline: .now()+3) {
             self.searchController.searchBar.placeholder = "Search any TV Show"
+            self.searchController.searchBar.becomeFirstResponder()
             
             self.navigationItem.hidesSearchBarWhenScrolling = false
             
@@ -46,8 +48,21 @@ extension SearchViewController: UISearchBarDelegate {
             guard let shows=shows else { return }
             self.searchResults = shows
             self.tableView.reloadData()
+            
+            if shows.count > 0 {
+                self.navigationItem.hidesSearchBarWhenScrolling = true
+            }
         }
     }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        
+        searchBar.resignFirstResponder()
+        searchBar.endEditing(true)
+        return true
+    }
+    
+    
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -70,6 +85,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
 }
