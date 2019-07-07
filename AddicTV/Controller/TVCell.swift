@@ -13,6 +13,7 @@ class TVCell:UITableViewCell {
     @IBOutlet weak var thumbnailImage:UIImageView!
     @IBOutlet weak var titleLabel:UILabel!
     @IBOutlet weak var subtitleLabel:UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
     
     var show:TVMazeShow! {
         didSet{
@@ -29,7 +30,7 @@ class TVCell:UITableViewCell {
     private func configureUI() {
         titleLabel.text = show.name
         subtitleLabel.text = show.genres.joined(separator: ", ")
-        
+        yearLabel.text = show.premiered
         thumbnailImage.image = UIImage(named: "placeholder")
         let captured = show
         if let url = captured?.image?.urlMedium {

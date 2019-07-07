@@ -25,8 +25,9 @@ struct TVMazeShow:Codable {
     let genres:[String]
     let image:TVMazeImage?
     let externals:TVMazeExternal
+    let premiered:String?
     enum codingKeys:String,CodingKey {
-        case id,url,name,language,genres,images,externals
+        case id,url,name,language,genres,images,externals, premiered
     }
     
 }
