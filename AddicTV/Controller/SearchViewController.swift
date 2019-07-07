@@ -10,6 +10,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
     var searchResults = [TVMazeShow]()
+    var selectedShow:TVMazeShow?
     
     @IBOutlet weak var tableView:UITableView!
     
@@ -20,18 +21,23 @@ class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now()+3) {
             self.searchController.searchBar.placeholder = "Search any TV Show"
             self.searchController.searchBar.becomeFirstResponder()
-            
+
             self.navigationItem.hidesSearchBarWhenScrolling = false
-            
+
         }
-        
+
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier=="search details" else { return }
+        guard let dvc = segue.destination as? ResultViewController else { return }
         
+        dvc.show = selectedShow
+    }
     
     
    
@@ -57,6 +63,8 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         
+        searchController.obscuresBackgroundDuringPresentation = false
+
         searchBar.resignFirstResponder()
         searchBar.endEditing(true)
         return true
@@ -90,6 +98,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
+        selectedShow = searchResults[indexPath.row]
+        
+        performSegue(withIdentifier: "search details", sender: nil)
         
     }
     
