@@ -39,7 +39,7 @@ class TVMazeAPI {
             guard error==nil else { callback?(nil,"Could not call API. \(error!.localizedDescription)\n\(url)"); return }
             guard let data = data else { callback?(nil,"no data"); return }
             
-            print(String(bytes: data, encoding: .utf8)!)
+            //print(String(bytes: data, encoding: .utf8)!)
             
             let decoder = JSONDecoder()
             do {

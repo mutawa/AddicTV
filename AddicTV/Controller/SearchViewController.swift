@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import CoreData
 
 class SearchViewController: UIViewController {
     var searchResults = [TVMazeShow]()
     var selectedShow:TVMazeShow?
+    var context:NSManagedObjectContext {
+        return DataController.shared.context
+    }
     
     @IBOutlet weak var tableView:UITableView!
     

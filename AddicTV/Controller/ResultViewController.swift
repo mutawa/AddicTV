@@ -7,9 +7,14 @@
 //
 
 import UIKit
-import WebKit
+import CoreData
+
 
 class ResultViewController: UIViewController {
+    
+    var context:NSManagedObjectContext {
+        return DataController.shared.context
+    }
     var show:TVMazeShow! {
         didSet {
             imageView?.image = nil
@@ -26,7 +31,25 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         configureUI()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToMyShows))
+        
+        let fr:NSFetchRequest<Show> = Show.fetchRequest()
+        let sd = NSSortDescriptor(key: "id", ascending: true)
+        let p = NSPredicate(format: "id == \(show.id)")
+        fr.predicate = p
+        
+        fr.sortDescriptors = [sd]
+        
+        if let result = try? context.fetch(fr) {
+            if result.count == 0 {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToMyShows))
+                
+            }
+        }
+        
+        
+        
+
+        
     }
     override func viewDidAppear(_ animated: Bool) {
         if imageView?.image == nil {
@@ -35,6 +58,24 @@ class ResultViewController: UIViewController {
     }
     
     @objc func addToMyShows() {
+        let show = Show(context: context)
+        show.id = Int64(self.show.id)
+        show.name = self.show.name
+        show.summary = self.show.summary
+        show.photo = self.imageView?.image?.pngData()
+        
+        // move this to a separate method
+        do {
+            try context.save()
+            navigationItem.rightBarButtonItem = nil
+            
+        } catch {
+            
+        }
+        
+        
+        
+        
         
     }
     func configureUI() {

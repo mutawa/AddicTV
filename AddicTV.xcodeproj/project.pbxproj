@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E03F4F0022D2069900484FEA /* FavioritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F4EFF22D2069900484FEA /* FavioritesViewController.swift */; };
+		E03F4F0322D2094C00484FEA /* TVMaze.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E03F4F0122D2094C00484FEA /* TVMaze.xcdatamodeld */; };
+		E03F4F0522D20A0300484FEA /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E03F4F0422D20A0300484FEA /* DataController.swift */; };
 		E04F868A22D1C1FB0003FFE3 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F868922D1C1FB0003FFE3 /* ResultViewController.swift */; };
 		E0A0FB5B22CE1AB20061CC42 /* TVMazeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */; };
 		E0A0FB5D22CE22720061CC42 /* TVMazeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */; };
@@ -21,6 +23,8 @@
 
 /* Begin PBXFileReference section */
 		E03F4EFF22D2069900484FEA /* FavioritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavioritesViewController.swift; sourceTree = "<group>"; };
+		E03F4F0222D2094C00484FEA /* TVMaze.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TVMaze.xcdatamodel; sourceTree = "<group>"; };
+		E03F4F0422D20A0300484FEA /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E04F868922D1C1FB0003FFE3 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeAPI.swift; sourceTree = "<group>"; };
 		E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMazeResult.swift; sourceTree = "<group>"; };
@@ -59,8 +63,10 @@
 		E0A0FB5922CE19730061CC42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E03F4F0422D20A0300484FEA /* DataController.swift */,
 				E0A0FB5A22CE1AB20061CC42 /* TVMazeAPI.swift */,
 				E0A0FB5C22CE22720061CC42 /* TVMazeResult.swift */,
+				E03F4F0122D2094C00484FEA /* TVMaze.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,7 +191,9 @@
 			files = (
 				E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */,
 				E0A0FB5B22CE1AB20061CC42 /* TVMazeAPI.swift in Sources */,
+				E03F4F0322D2094C00484FEA /* TVMaze.xcdatamodeld in Sources */,
 				E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */,
+				E03F4F0522D20A0300484FEA /* DataController.swift in Sources */,
 				E03F4F0022D2069900484FEA /* FavioritesViewController.swift in Sources */,
 				E0B695C022CE473D00ED0616 /* TVCell.swift in Sources */,
 				E04F868A22D1C1FB0003FFE3 /* ResultViewController.swift in Sources */,
@@ -391,6 +399,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E03F4F0122D2094C00484FEA /* TVMaze.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E03F4F0222D2094C00484FEA /* TVMaze.xcdatamodel */,
+			);
+			currentVersion = E03F4F0222D2094C00484FEA /* TVMaze.xcdatamodel */;
+			path = TVMaze.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E0D32CF322CDFF8F00A9BACE /* Project object */;
 }
