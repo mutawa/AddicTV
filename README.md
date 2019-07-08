@@ -1,43 +1,42 @@
-# AddicTV: get Addicted to TV shows easily
+# AddicTV : The app for TV Addicts
 
-AddicTV is an app that lets any user search TVMaze database, and read the synopses of the show. 
-
-The app enables the user to read release data, genres, etc.
-
-When launched for the first time, the user will be prompted to lookup any show using the Search Bar in the Search View Controller.
-
-If the search term was not matched with any resutl, the user will be notified, in a un-obstrutive way.
-
-If for some reason, the API was unable to access the internet, the user will receive a feedback in the same manner.
-
-The user can select any show from the result, a segue will take place to view the show poster in higher resolution,
-as well as a summary of the show's synopses. The high resolution poster image might take some time to load. An activity
-indicator is displayed for the user to let him/her know that a network call is in-progress.
-
-Once all data is retrieved, the app will check if the show has previously been added to the user's list of favorite shows.
-
-If not, an Add button [+] will appear on the top right corner of the view controller to all the user to do so.
-
-Once the button is tapped, it will disappear to give feedback to the user that the action has been carried out.
-
-The user can select the second tab of the TabBarController to see a list of the shows that were added.
-
-These shows are loaded from CoreData, and are editable. This means that the user doesn't have to be connected to the Internet 
-to read synopses or see high resolution poster of the favorite shows.
-
-The user can also remove/delete shows from the favorite list. 
-Once the user has deleted the last show, a default placeholder label will be displayed to give a better experience.
-
-The default/placeholder cells is un-editable, and un-selectable in all view controllers.
-
-If the user selects a cell containing a favorite show, a segue will take place to the shows details view controller.
-
-However, this time the show will be passed to the destination view controller as a CoreData object, as opppsed to from the API 
-network call. The destination controller handles objects from CoreData and from API just the same, via the magic of protocols.
-
-A great deal of care went to the writing of code that makes sure that asyncronous calls to the network ensures that
-thumbnails of dequeued cells are updated only if they still are grabbing their own model that was available before the
-network API call was initiated. This means, there won't be any weired UI experience for the user.
+This app will make it easy for any user to search TVMaze database of all TV shows, and view information about the shows, like the release date, genre, and plot synposes. The app also provides a way to visually identify shows by a small thumbnail image, nad a higher resolution poster.
 
 
+# Implementation
 
+Once the app is launched for the first time, the user will be in the Search view controller. 
+A friendly message will guide the user as to what should be done. The user may start by searching for any particular show.
+The TVMaze API will try to match the search term with its database and will provide search results for the user to select and see more details. 
+
+If the API fails to find any matches, a freindly message is displayed to the user to let them know that the search used could not be matched. The message is updated with each change of the SearchBar textfield, so the user has constant feedback.
+
+If however, the API fails to access the Internet, another message appears to inform the user.
+
+Everytime there is a network acitivity, an activity indicator (spinner) is displayed until the communication is stopped.
+
+Once a show is selected from the search result, the user will be presented to the Show view controller, where a summary of the plot synopses is displayed along with a higher resoultion image of the poster. Once the higher resolution image is downloaded, it is temporarly stored. 
+
+The app also checks if the selected show has previously been added to the user's favorite list. If not, a system button (Add/+) is added to the top right of the Show view controller to let the user easily add the show. Once the button is tapped, it disappears giving a subtle feedback to the user.
+
+If the user tabs the (Favorites) tab from UITabBarController, the Favorites view controller will be displayed.
+If it is empty when that happens, a freindly message is dsiplayed. 
+
+The list of favorite shows is stored in CoreData. Meaning, no network connection is required to view and read the favorite shows. 
+
+The user can easily edit the favorite shows list by deleting or adding new shows via the search tab.
+
+
+# How to build
+
+In XCode, build and run by holding Command ⌘ + R
+
+# Requirements
+
+Xcode 10.2
+Swift 4.2
+iOS 12.0 +
+
+# License
+
+MIT license
