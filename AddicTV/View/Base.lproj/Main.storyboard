@@ -79,7 +79,7 @@
                                             <outlet property="yearLabel" destination="6OP-HP-wqd" id="sMl-DQ-Bby"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="placeholder" textLabel="n5g-OM-LRD" rowHeight="150" style="IBUITableViewCellStyleDefault" id="UOy-Ot-9mJ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="placeholder" textLabel="n5g-OM-LRD" rowHeight="150" style="IBUITableViewCellStyleDefault" id="UOy-Ot-9mJ">
                                         <rect key="frame" x="0.0" y="117" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UOy-Ot-9mJ" id="ZuG-An-ijT">
@@ -98,7 +98,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="no result" textLabel="bYP-El-Sol" rowHeight="150" style="IBUITableViewCellStyleDefault" id="vkO-Oa-i5c">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="no result" textLabel="bYP-El-Sol" rowHeight="150" style="IBUITableViewCellStyleDefault" id="vkO-Oa-i5c">
                                         <rect key="frame" x="0.0" y="267" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vkO-Oa-i5c" id="5k3-5s-bHp">
@@ -147,7 +147,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
             </objects>
             <point key="canvasLocation" x="1073" y="-606"/>
         </scene>
-        <!--My Favorite Shows-->
+        <!--My Favorite-->
         <scene sceneID="mF4-IZ-yqN">
             <objects>
                 <viewController id="eUh-Pg-5ny" customClass="FavioritesViewController" customModule="AddicTV" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,7 +156,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ee7-36-UXb">
-                                <rect key="frame" x="0.0" y="116" width="375" height="502"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="87" id="8hU-Yz-ejU" customClass="ShowTableViewCell" customModule="AddicTV" customModuleProvider="target">
@@ -216,7 +216,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                                             <outlet property="yearLabel" destination="QBU-WK-l0l" id="5c9-Ta-EQ7"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="placeholder" textLabel="guS-mb-x1o" rowHeight="138" style="IBUITableViewCellStyleDefault" id="gvb-b1-BbO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="placeholder" textLabel="guS-mb-x1o" rowHeight="138" style="IBUITableViewCellStyleDefault" id="gvb-b1-BbO">
                                         <rect key="frame" x="0.0" y="115" width="375" height="138"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gvb-b1-BbO" id="NpE-E7-u9E">
@@ -249,7 +249,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1fT-1d-e3m"/>
                     </view>
-                    <navigationItem key="navigationItem" title="My Favorite Shows" id="Oqr-FL-eHz"/>
+                    <navigationItem key="navigationItem" title="My Favorite" largeTitleDisplayMode="never" id="Oqr-FL-eHz"/>
                     <connections>
                         <outlet property="tableView" destination="Ee7-36-UXb" id="jl4-hI-guI"/>
                         <segue destination="uIU-F6-uzv" kind="show" identifier="show favorite" id="xeu-yJ-LWw"/>
@@ -268,20 +268,20 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8b-Xb-oEv">
-                                <rect key="frame" x="37.5" y="136" width="300" height="300"/>
+                                <rect key="frame" x="37.5" y="84" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="gna-K0-7ne"/>
                                     <constraint firstAttribute="width" secondItem="Z8b-Xb-oEv" secondAttribute="height" multiplier="1:1" id="hyK-Gg-LWd"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CxT-ut-h3b">
-                                <rect key="frame" x="20" y="456" width="335" height="112"/>
+                                <rect key="frame" x="20" y="404" width="335" height="164"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Whm-iO-3To">
-                                <rect key="frame" x="169" y="267.5" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Whm-iO-3To">
+                                <rect key="frame" x="169" y="215.5" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                         </subviews>

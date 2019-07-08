@@ -25,3 +25,43 @@ struct ApiShow:Codable {
     
     
 }
+
+
+extension ApiShow:Media {
+    
+    var showId: Int { return id }
+    var title: String? { return name }
+    var synopses: String? { return summary }
+    
+    // geners are returned from API in the form of an Array of strings
+    var genresList: String? { return genres.joined(separator: ", ") }
+    var date: String? { return premiered }
+    var requiresFetching:Bool { return true }
+    
+    // these Data? properties are not obtained from the initial search API call
+    // these will be used to hold the data temporarly until the user decides to
+    // add the media to his/her favorites list
+    var thumbnailPhoto: Data? {
+        get {
+            return image?.mediumPhoto
+        }
+        set {
+            image?.mediumPhoto = newValue
+        }
+    }
+    
+    var detailPhoto: Data? {
+        get {
+            return image?.originalPhoto
+        }
+        set {
+            image?.originalPhoto = newValue
+        }
+    }
+    
+    // make sure all url from API are secure
+    var posterUrl: String? { return image?.original.toSecureHttp}
+    var thumbnailUrl: String? { return image?.medium.toSecureHttp }
+    
+    
+}

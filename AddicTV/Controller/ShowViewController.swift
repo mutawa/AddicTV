@@ -16,7 +16,7 @@ class ShowViewController: UIViewController {
         return DataController.shared.context
     }
     
-    var show:TVSeries! {
+    var show:Media! {
         didSet {
             imageView?.image = nil
 
@@ -31,16 +31,7 @@ class ShowViewController: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        checkIfShowIsInMyFavorites()
-        
-        
-        
         configureUI()
-        
-        
-        
-        
     }
     
     private func checkIfShowIsInMyFavorites() {
@@ -92,6 +83,7 @@ class ShowViewController: UIViewController {
         // only start fetching when the view is visible to the user
         if imageView?.image == nil {
             summaryTextField.text = show.synopses?.htmlToString
+            title = show.title
             
             if let imgData = show.detailPhoto {
                 self.imageView?.image = UIImage(data: imgData)
@@ -101,23 +93,29 @@ class ShowViewController: UIViewController {
             
             
             if show.requiresFetching, let urlString = show.posterUrl {
+                
+                // we are populating the view from the API
+                
+                spinner.startAnimating()
                 API.shared.getImage(urlString: urlString) { [weak self] data,error in
                     self?.spinner.stopAnimating()
-                    guard error==nil else { self?.imageView?.image = UIImage(named: "placeholder");  return }
+                    
+                    guard error==nil else { self?.imageView?.image = UIImage(named: Constants.Show.placeholderImageName);  return }
                     guard let data=data else { return }
                     
                     self?.show.detailPhoto = data
-                    
                     self?.imageView?.image = UIImage(data: data)
+                    self?.checkIfShowIsInMyFavorites()
+                    
                 }
             } else {
+                // incase we are populating the view from CoreData
                 if let imgData = show.detailPhoto {
                     self.imageView?.image = UIImage(data: imgData)
                 }
                 
             }
-            
-            
+
            
         }
        

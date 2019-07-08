@@ -8,87 +8,7 @@
 
 import UIKit
 
-protocol TVSeries {
-    var showId:Int {get}
-    var title:String? {get}
-    var synopses:String? {get}
-    var thumbnailUrl:String? {get}
-    var posterUrl:String? {get}
-    var genresList:String? {get}
-    var date:String? {get}
-    var thumbnailPhoto:Data? {get set}
-    var detailPhoto:Data? {get set}
-    var requiresFetching:Bool {get}
-    
-}
 
-extension Show:TVSeries {
-    var thumbnailPhoto: Data? {
-        get {
-            return thumbnail
-        }
-        set {
-            thumbnail = newValue
-        }
-    }
-    
-    var detailPhoto: Data? {
-        get {
-            return photo
-        }
-        set {
-            photo = newValue
-        }
-    }
-    
-    var posterUrl: String? {
-        return nil
-    }
-    
-
-    
-    var showId: Int { return Int(id) }
-    var title: String? { return name }
-    var synopses: String? { return self.summary }
-    var thumbnailUrl: String? { return nil }
-    var genresList: String? { return genres }
-    var date: String? { return releaseDate }
-    var requiresFetching:Bool { return false }
-}
-
-extension ApiShow:TVSeries {
-    var thumbnailPhoto: Data? {
-        get {
-            return image?.mediumPhoto
-        }
-        set {
-            //print("setting tv struct thumbnail photo \(id)")
-            image?.mediumPhoto = newValue
-        }
-    }
-    
-    var detailPhoto: Data? {
-        get {
-            return image?.originalPhoto
-        }
-        set {
-            image?.originalPhoto = newValue
-        }
-    }
-    
-    var posterUrl: String? {
-        return image?.original.toSecureHttp
-    }
-    
-        
-    var showId: Int { return id }
-    var title: String? { return name }
-    var synopses: String? { return summary }
-    var thumbnailUrl: String? { return image?.medium.toSecureHttp }
-    var genresList: String? { return genres.joined(separator: ", ") }
-    var date: String? { return premiered }
-    var requiresFetching:Bool { return true }
-}
 
 class ShowTableViewCell:UITableViewCell {
     
@@ -97,7 +17,7 @@ class ShowTableViewCell:UITableViewCell {
     @IBOutlet weak var subtitleLabel:UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     
-    var show:TVSeries! {
+    var show:Media! {
         didSet {
             configureUI()
         }
@@ -116,47 +36,52 @@ class ShowTableViewCell:UITableViewCell {
         thumbnailImage.image = nil
         
         
+        // since we are dealing with an object that conforms to Media protocol,
+        // we only need to see if we are dealing with a struct so that we may
+        // ask the API to fetch the images. Otherwise, CoreData already has photo
+        // data stored
         
         if show.requiresFetching {
-            //print("\(show.title ?? "this show is") a struct requires fetching")
+            // double check, we may already have an image. There is no point wasting resources
             if show.thumbnailPhoto == nil {
-                //print("\(show.title ?? "this show is") attempting fetching")
+                
+                // take a note of what we are about to request (i.e, make a copy of the struct)
+                // this copy will be useful when the API is finished loading an image. We will
+                // check if the returned image is really the one we have been waiting for.
+                // The user might have scrolled away, or the cell has been dequeued and its model
+                // has changed. So we will ensure that we are updating the right cell
                 let captured = show
+                
+                
                 if let url = captured?.thumbnailUrl {
                     API.shared.getImage(urlString: url) { [weak self] data, error in
                         
                         guard error == nil else { return }
                         guard let data = data else { return }
-                        guard captured?.showId == self?.show.showId else {
-                            //print("\(captured?.title ?? "this show is") too late. different than \(self?.show.title ?? "was old show title")");
-                            return }
+                        
+                        // check if the model is the same one as it was before the API call
+                        guard captured?.showId == self?.show.showId else { return }
+                        
+                        // it is the same model. Update its thumbnail photo
                         self?.show.thumbnailPhoto = data
                         self?.thumbnailImage.image = UIImage(data: data)
                     }
                 }
             } else {
-                //print("\(self.show.title ?? "this show is ") but no need to fetch. Already have the image data")
+                // no fetching. The imageData is already available
                 self.thumbnailImage.image = UIImage(data: show.thumbnailPhoto!)
             }
         } else {
+            // This is a CoreData object, no fetching required
             
-            //print("\(self.show.title ?? "this show is") CoreData no fetching required")
             if let thumbData = self.show.thumbnailPhoto {
-                //print("\(self.show.title ?? "this show is ") has thumbnail data")
+                
                 self.imageView?.image = UIImage(data: thumbData)
             } else {
-                thumbnailImage.image = UIImage(named: "placeholder")
-                //print("\(self.show.title ?? "this show is") missing thumbnail photo data")
-                
+                thumbnailImage.image = UIImage(named: Constants.Show.placeholderImageName )
             }
         }
         
         
-    }
-}
-
-extension String {
-    var toSecureHttp : String {
-        return self.replacingOccurrences(of: "http://", with: "https://", options: .literal, range: nil)
     }
 }

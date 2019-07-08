@@ -13,6 +13,8 @@
 		E04F868A22D1C1FB0003FFE3 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E04F868922D1C1FB0003FFE3 /* ShowViewController.swift */; };
 		E0A0FB5B22CE1AB20061CC42 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A0FB5A22CE1AB20061CC42 /* API.swift */; };
 		E0B695C022CE473D00ED0616 /* ShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B695BF22CE473D00ED0616 /* ShowTableViewCell.swift */; };
+		E0D3054C22D3844300C24992 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3054B22D3844300C24992 /* Utils.swift */; };
+		E0D3054F22D3853D00C24992 /* Show+Extras.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D3054E22D3853D00C24992 /* Show+Extras.swift */; };
 		E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */; };
 		E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */; };
 		E0D32D0422CDFF8F00A9BACE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0D32D0222CDFF8F00A9BACE /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 		E04F868922D1C1FB0003FFE3 /* ShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 		E0A0FB5A22CE1AB20061CC42 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		E0B695BF22CE473D00ED0616 /* ShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTableViewCell.swift; sourceTree = "<group>"; };
+		E0D3054B22D3844300C24992 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E0D3054E22D3853D00C24992 /* Show+Extras.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Show+Extras.swift"; sourceTree = "<group>"; };
 		E0D32CFB22CDFF8F00A9BACE /* AddicTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AddicTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D32CFE22CDFF8F00A9BACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -58,10 +62,10 @@
 		E0A0FB5822CE19620061CC42 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */,
 				E03F4EFF22D2069900484FEA /* FavioritesViewController.swift */,
 				E04F868922D1C1FB0003FFE3 /* ShowViewController.swift */,
 				E0B695BF22CE473D00ED0616 /* ShowTableViewCell.swift */,
-				E0D32D0022CDFF8F00A9BACE /* SearchViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -69,12 +73,22 @@
 		E0A0FB5922CE19730061CC42 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E0F7029422D3660A00D0D4F5 /* API */,
+				E0D3054D22D3852B00C24992 /* CoreData */,
 				E03F4F0422D20A0300484FEA /* DataController.swift */,
 				E0F7028E22D364A700D0D4F5 /* Constants.swift */,
-				E0F7029422D3660A00D0D4F5 /* API */,
-				E03F4F0122D2094C00484FEA /* TVMaze.xcdatamodeld */,
+				E0D3054B22D3844300C24992 /* Utils.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E0D3054D22D3852B00C24992 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E03F4F0122D2094C00484FEA /* TVMaze.xcdatamodeld */,
+				E0D3054E22D3853D00C24992 /* Show+Extras.swift */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		E0D32CF222CDFF8F00A9BACE = {
@@ -207,10 +221,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0D32D0122CDFF8F00A9BACE /* SearchViewController.swift in Sources */,
+				E0D3054F22D3853D00C24992 /* Show+Extras.swift in Sources */,
 				E0F7028D22D3639700D0D4F5 /* ApiResult.swift in Sources */,
 				E0A0FB5B22CE1AB20061CC42 /* API.swift in Sources */,
 				E03F4F0322D2094C00484FEA /* TVMaze.xcdatamodeld in Sources */,
 				E0D32CFF22CDFF8F00A9BACE /* AppDelegate.swift in Sources */,
+				E0D3054C22D3844300C24992 /* Utils.swift in Sources */,
 				E0F7028F22D364A700D0D4F5 /* Constants.swift in Sources */,
 				E03F4F0522D20A0300484FEA /* DataController.swift in Sources */,
 				E03F4F0022D2069900484FEA /* FavioritesViewController.swift in Sources */,

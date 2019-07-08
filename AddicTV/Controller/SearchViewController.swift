@@ -81,10 +81,8 @@ extension SearchViewController: UISearchBarDelegate {
         }
     }
     
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        
 
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         searchBar.resignFirstResponder()
         searchBar.endEditing(true)
         return true
@@ -103,23 +101,35 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
+        // check if we have objects in the array (i.e: we have search results)
         if searchResults.count>0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? ShowTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Search.normalCellIdentifier) as? ShowTableViewCell
             cell?.show = searchResults[indexPath.row]
             return cell!
         } else {
+            // we don't have any search restls
+            
+            // first check if the user was trying to search for something that does not exits
+            
             if let searchText = searchController.searchBar.text, searchText.count > 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "no result")
+            
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Search.noResultCellIdentifier)
                 cell?.textLabel?.text = "Could not find any results for \"\(searchText)\""
+                
+                // it might be useful to check if there was an API error and
+                // display that to the user
+                
                 if apiErrorMessage != nil {
+                    // replace the [No Result] message with the error from the API
                     cell?.textLabel?.text = apiErrorMessage
-
                 }
                 return cell!
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "placeholder")
-                //cell?.textLabel?.text = "Start by searching for a show"
+                // the user was not searching for anything.
+                // display the welcome label
+                let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Search.defaultCellIdentifier)
+                
                 return cell!
             }
             
@@ -130,16 +140,31 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return searchResults.count>0 ? 80 : 160
+        // If this is a normal data row, then return 80 points.
+        // If else, then it is either a [No Result], [Error from API], or [Welcome]
+        // In that case, return double the points
+        
+        return searchResults.count>0 ? Constants.Search.dataRowHeight : Constants.Search.emptyRowHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        // first, remove the selection
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        // make sure the user didn't just tap the [welcome] or the [no results] cells
+        guard searchResults.count > 0 else {  return }
+        
+        
+        // extract the show object from the cell
+        // since it might have been mutated by the cell, and if it is a struct
+        // the copy mutated by the cell will not be present from the datasource array
+        // but if it is a class, then this would work too
+        // ps: mutated copy contains images pulled from the network
+        // it would be a waste to pull them again when seguing to the next view controller
         let cell = tableView.cellForRow(at: indexPath) as! ShowTableViewCell
         
         
-        performSegue(withIdentifier: "search details", sender: cell.show)
+        performSegue(withIdentifier: Constants.Search.segueIdentifier, sender: cell.show)
         
     }
     
