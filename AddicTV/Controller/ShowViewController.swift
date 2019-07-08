@@ -19,20 +19,31 @@ class ShowViewController: UIViewController {
     var show:TVSeries! {
         didSet {
             imageView?.image = nil
-            //configureUI()
+
         }
         
     }
     
     @IBOutlet weak var imageView: UIImageView?
     @IBOutlet weak var summaryTextField: UITextView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
-    override func viewDidLoad() {
-        configureUI()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
+        
+        checkIfShowIsInMyFavorites()
+        
+        
+        
+        configureUI()
+        
+        
+        
+        
+    }
+    
+    private func checkIfShowIsInMyFavorites() {
         
         let fr:NSFetchRequest<Show> = Show.fetchRequest()
         let sd = NSSortDescriptor(key: "id", ascending: true)
@@ -46,16 +57,6 @@ class ShowViewController: UIViewController {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToMyShows))
                 
             }
-        }
-        
-        
-        
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        if imageView?.image == nil {
-            configureUI()
         }
     }
     
@@ -88,9 +89,8 @@ class ShowViewController: UIViewController {
     func configureUI() {
         
         
-        
         // only start fetching when the view is visible to the user
-        if view.window != nil {
+        if imageView?.image == nil {
             summaryTextField.text = show.synopses?.htmlToString
             
             if let imgData = show.detailPhoto {
@@ -102,6 +102,7 @@ class ShowViewController: UIViewController {
             
             if show.requiresFetching, let urlString = show.posterUrl {
                 API.shared.getImage(urlString: urlString) { [weak self] data,error in
+                    self?.spinner.stopAnimating()
                     guard error==nil else { self?.imageView?.image = UIImage(named: "placeholder");  return }
                     guard let data=data else { return }
                     

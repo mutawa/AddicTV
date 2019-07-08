@@ -257,7 +257,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vcU-dE-ZMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1072.8" y="849.62518740629696"/>
+            <point key="canvasLocation" x="1073" y="107"/>
         </scene>
         <!--Show View Controller-->
         <scene sceneID="sLU-LP-dTc">
@@ -268,25 +268,30 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8b-Xb-oEv">
-                                <rect key="frame" x="37.5" y="84" width="300" height="300"/>
+                                <rect key="frame" x="37.5" y="136" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="gna-K0-7ne"/>
                                     <constraint firstAttribute="width" secondItem="Z8b-Xb-oEv" secondAttribute="height" multiplier="1:1" id="hyK-Gg-LWd"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CxT-ut-h3b">
-                                <rect key="frame" x="20" y="404" width="335" height="164"/>
+                                <rect key="frame" x="20" y="456" width="335" height="112"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Whm-iO-3To">
+                                <rect key="frame" x="169" y="267.5" width="37" height="37"/>
+                                <color key="color" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5Wi-vk-fgi" firstAttribute="bottom" secondItem="CxT-ut-h3b" secondAttribute="bottom" constant="50" id="C9K-Sj-TOG"/>
                             <constraint firstItem="5Wi-vk-fgi" firstAttribute="trailing" secondItem="CxT-ut-h3b" secondAttribute="trailing" constant="20" id="X7a-KF-aaE"/>
                             <constraint firstItem="CxT-ut-h3b" firstAttribute="top" secondItem="Z8b-Xb-oEv" secondAttribute="bottom" constant="20" id="YnK-nk-lvO"/>
+                            <constraint firstItem="Whm-iO-3To" firstAttribute="centerX" secondItem="Z8b-Xb-oEv" secondAttribute="centerX" id="fEo-gf-foz"/>
+                            <constraint firstItem="Whm-iO-3To" firstAttribute="centerY" secondItem="Z8b-Xb-oEv" secondAttribute="centerY" id="j31-ej-PZM"/>
                             <constraint firstItem="Z8b-Xb-oEv" firstAttribute="top" secondItem="5Wi-vk-fgi" secondAttribute="top" constant="20" id="l38-Fa-TWg"/>
                             <constraint firstItem="CxT-ut-h3b" firstAttribute="leading" secondItem="5Wi-vk-fgi" secondAttribute="leading" constant="20" id="mi5-Hm-lDz"/>
                             <constraint firstItem="Z8b-Xb-oEv" firstAttribute="centerX" secondItem="5Wi-vk-fgi" secondAttribute="centerX" id="tU3-g9-BHl"/>
@@ -295,12 +300,13 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Z8b-Xb-oEv" id="EYa-3F-N9B"/>
+                        <outlet property="spinner" destination="Whm-iO-3To" id="HDc-A9-Gtw"/>
                         <outlet property="summaryTextField" destination="CxT-ut-h3b" id="FJF-rj-2rg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h4f-qF-OsJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2586" y="434"/>
+            <point key="canvasLocation" x="2082" y="-256"/>
         </scene>
         <!--Search-->
         <scene sceneID="Zl7-g9-0Zf">
@@ -341,7 +347,7 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uDg-lz-X9c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="134" y="850"/>
+            <point key="canvasLocation" x="89" y="107"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1dV-HQ-X5r">
@@ -360,10 +366,10 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yhI-e4-vSe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1252" y="132"/>
+            <point key="canvasLocation" x="-894" y="-257"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qYn-eO-FrG"/>
+        <segue reference="xeu-yJ-LWw"/>
     </inferredMetricsTieBreakers>
 </document>

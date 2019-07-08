@@ -24,7 +24,7 @@ class API {
             switch(self) {
             case .search(let query):
                 url += "search/shows?q=\(query.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil))"
-            
+                
             }
             return url
         }
@@ -35,50 +35,39 @@ class API {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data,response,error in
             DispatchQueue.main.async {
-                guard error==nil else { callback?(nil,"Could not call API. \(error!.localizedDescription)\n\(url)"); return }
-                guard let data = data else { callback?(nil,"no data"); return }
                 
-                //print(String(bytes: data, encoding: .utf8)!)
+                guard error==nil else { callback?(nil,"Could not communicate with server. \(error!.localizedDescription)\n"); return }
+                guard let data = data else { callback?(nil,"The server responded with a blank data"); return }
                 
                 let decoder = JSONDecoder()
                 do {
                     let results = try decoder.decode([ApiResult].self, from: data)
+                    
                     var shows = [ApiShow]()
                     for result in results {
-                        
                         shows.append(result.show)
                     }
                     
                     callback?(shows,nil)
                     
-                    
-                    
                 } catch {
-                    callback?(nil, "error: \(error.localizedDescription)")
+                    callback?(nil, "Could not convert server reply to Shows Array. error: \(error.localizedDescription)")
                 }
             }
             
-            
-            
-            
-        }.resume()
+            }.resume()
     }
     
     func getImage(urlString: String, callback: ((Data?,Error?)->())?=nil) {
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url) { data,response,error in
-                
-                
                 DispatchQueue.main.async {
                     guard error==nil else { callback?(nil,error); return }
                     guard let data = data else { callback?(nil,nil); return }
                     callback?(data,nil)
                     
                 }
-                
-                
-            }.resume()
-            
+                }.resume()
         }
     }
     

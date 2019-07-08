@@ -12,4 +12,7 @@ struct Constants {
     struct TVMaze {
         static let url = "https://api.tvmaze.com/"
     }
+    struct Search {
+        static let segueIdentifier = "search details"
+    }
 }
