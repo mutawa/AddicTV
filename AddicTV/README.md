@@ -1,4 +1,4 @@
-#AddicTV 
+# AddicTV 
 AddicTV is an app that lets any user search TVMaze database, and read the synopses of the show. 
 
 The app enables the user to read release data, genres, etc.
