@@ -25,6 +25,7 @@ class FavioritesViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(toggleEditingMode))
         
         
     }
@@ -32,6 +33,17 @@ class FavioritesViewController : UIViewController {
         reload()
     }
     
+    @objc func toggleEditingMode() {
+        
+        let item:UIBarButtonItem.SystemItem = (tableView.isEditing) ? .edit : .done
+        
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: item, target: self, action: #selector(toggleEditingMode))
+        
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        
+    }
     private func reload() {
 
 //        if view.window != nil {
@@ -53,16 +65,35 @@ class FavioritesViewController : UIViewController {
 
 extension FavioritesViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("number of rows in section \(section) is \(favorites.count)")
+        
         return favorites.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cell for [\(indexPath.section)][\(indexPath.row)]")
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TVCell else { return UITableViewCell() }
         
         cell.show = favorites[indexPath.row]
         
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        switch(editingStyle) {
+        case .delete:
+            tableView.beginUpdates()
+            let toRemove = favorites.remove(at: indexPath.row)
+            context.delete(toRemove)
+            try? context.save()
+            print("deleting row at [\(indexPath.section)][\(indexPath.row)]")
+            tableView.deleteRows(at: [indexPath], with: .top)
+            tableView.endUpdates()
+        default:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

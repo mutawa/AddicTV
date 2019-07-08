@@ -21,21 +21,38 @@ class SearchViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles = false
+        definesPresentationContext = true
         
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
-
-        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
-            self.searchController.searchBar.placeholder = "Search any TV Show"
-            self.searchController.searchBar.becomeFirstResponder()
-
-            self.navigationItem.hidesSearchBarWhenScrolling = false
-
-        }
+        searchController.obscuresBackgroundDuringPresentation = false
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
+//            self.searchController.searchBar.placeholder = "Search any TV Show"
+//            self.searchController.searchBar.becomeFirstResponder()
+//
+//
+//
+//        }
 
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("will appear")
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("will dis-appear")
+        self.searchController.searchBar.resignFirstResponder()
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("did appear")
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier=="search details" else { return }
         guard let dvc = segue.destination as? ResultViewController else { return }
@@ -45,6 +62,7 @@ class SearchViewController: UIViewController {
         
         
     }
+    
     
     
    
@@ -70,7 +88,7 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
         
-        searchController.obscuresBackgroundDuringPresentation = false
+        
 
         searchBar.resignFirstResponder()
         searchBar.endEditing(true)
@@ -105,9 +123,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-       
+        let cell = tableView.cellForRow(at: indexPath) as! TVCell
         
-        performSegue(withIdentifier: "search details", sender: searchResults[indexPath.row])
+        
+        performSegue(withIdentifier: "search details", sender: cell.show)
         
     }
     

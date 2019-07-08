@@ -62,7 +62,7 @@ extension TVMazeShow:TVSeries {
             return image?.mediumPhoto
         }
         set {
-            print("setting tv struct thumbnail photo \(id)")
+            //print("setting tv struct thumbnail photo \(id)")
             image?.mediumPhoto = newValue
         }
     }
@@ -113,22 +113,44 @@ class TVCell:UITableViewCell {
         titleLabel.text = show.title
         subtitleLabel.text = show.genresList
         yearLabel.text = show.date
-        thumbnailImage.image = UIImage(named: "placeholder")
-        if show.thumbnailPhoto==nil,  show.requiresFetching {
-            let captured = show
-            if let url = captured?.thumbnailUrl {
-                TVMazeAPI.shared.getImage(urlString: url) { [weak self] data, error in
-                    
-                    guard error == nil else { return }
-                    guard let data = data else { return }
-                    guard captured?.showId == self?.show.showId else { print("too late. different"); return }
-                    self?.show.thumbnailPhoto = data
-                    self?.thumbnailImage.image = UIImage(data: data)
+        thumbnailImage.image = nil
+        
+        
+        
+        if show.requiresFetching {
+            //print("\(show.title ?? "this show is") a struct requires fetching")
+            if show.thumbnailPhoto == nil {
+                //print("\(show.title ?? "this show is") attempting fetching")
+                let captured = show
+                if let url = captured?.thumbnailUrl {
+                    TVMazeAPI.shared.getImage(urlString: url) { [weak self] data, error in
+                        
+                        guard error == nil else { return }
+                        guard let data = data else { return }
+                        guard captured?.showId == self?.show.showId else {
+                            //print("\(captured?.title ?? "this show is") too late. different than \(self?.show.title ?? "was old show title")");
+                            return }
+                        self?.show.thumbnailPhoto = data
+                        self?.thumbnailImage.image = UIImage(data: data)
+                    }
                 }
+            } else {
+                //print("\(self.show.title ?? "this show is ") but no need to fetch. Already have the image data")
+                self.thumbnailImage.image = UIImage(data: show.thumbnailPhoto!)
             }
         } else {
             
+            //print("\(self.show.title ?? "this show is") CoreData no fetching required")
+            if let thumbData = self.show.thumbnailPhoto {
+                //print("\(self.show.title ?? "this show is ") has thumbnail data")
+                self.imageView?.image = UIImage(data: thumbData)
+            } else {
+                thumbnailImage.image = UIImage(named: "placeholder")
+                //print("\(self.show.title ?? "this show is") missing thumbnail photo data")
+                
+            }
         }
+        
         
     }
 }
