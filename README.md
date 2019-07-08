@@ -17,7 +17,7 @@ Everytime there is a network acitivity, an activity indicator (spinner) is displ
 
 Once a show is selected from the search result, the user will be presented to the Show view controller, where a summary of the plot synopses is displayed along with a higher resoultion image of the poster. Once the higher resolution image is downloaded, it is temporarly stored. 
 
-The app also checks if the selected show has previously been added to the user's favorite list. If not, a system button (Add/+) is added to the top right of the Show view controller to let the user easily add the show. Once the button is tapped, it disappears giving a subtle feedback to the user.
+The app also checks if the selected show has previously been added to the user's favorite list. If not, a star button is added to the top right of the Show view controller to let the user easily add the show. Once the button is tapped, it the star is filled and stays filled for 1 second before the button is disabled, as a visual feedback to confirm to the user that the showhas been added to his/her favorite list.
 
 If the user tabs the (Favorites) tab from UITabBarController, the Favorites view controller will be displayed.
 If it is empty when that happens, a freindly message is dsiplayed. 
