@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sqb-sE-NeE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sqb-sE-NeE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -169,10 +169,10 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="osa-Ou-mf0">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3by-nw-42n">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3by-nw-42n">
                                                             <rect key="frame" x="0.0" y="3.5" width="80" height="80"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="3by-nw-42n" secondAttribute="height" multiplier="1:1" id="5Cy-tX-1gq"/>
+                                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="80" id="B4T-x4-4pA"/>
                                                                 <constraint firstAttribute="height" constant="80" id="G7S-Bx-drB"/>
                                                             </constraints>
                                                         </imageView>
@@ -267,11 +267,11 @@ like (Breaking Bad, The Simpsons, Game of Thrones)</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8b-Xb-oEv">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z8b-Xb-oEv">
                                 <rect key="frame" x="37.5" y="84" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="gna-K0-7ne"/>
-                                    <constraint firstAttribute="width" secondItem="Z8b-Xb-oEv" secondAttribute="height" multiplier="1:1" id="hyK-Gg-LWd"/>
+                                    <constraint firstAttribute="height" constant="300" id="zMq-1m-FvT"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CxT-ut-h3b">
