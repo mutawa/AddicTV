@@ -45,8 +45,12 @@ class ShowViewController: UIViewController {
         
         if let result = try? context.fetch(fr) {
             if result.count == 0 {
-                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToMyShows))
+//                navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .bookmarks , target: self, action: #selector(addToMyShows))
+                navigationItem.rightBarButtonItem = UIBarButtonItem(title: "☆", style: .plain, target: self, action: #selector(addToMyShows))
                 
+                
+            } else {
+                showAlreadyFavoredButton()
             }
         }
     }
@@ -62,11 +66,12 @@ class ShowViewController: UIViewController {
         newShow.genres = self.show.genresList
         newShow.releaseDate = self.show.date
         
-        // move this to a separate method
         
         do {
             try context.save()
-            navigationItem.rightBarButtonItem = nil
+            
+            showAlreadyFavoredButton()
+            
             
         } catch {
             
@@ -77,6 +82,17 @@ class ShowViewController: UIViewController {
         
         
     }
+    
+    func showAlreadyFavoredButton() {
+        let button = UIBarButtonItem(title: "★", style: .plain, target: self, action: nil)
+        navigationItem.rightBarButtonItem = button
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            button.isEnabled = false
+        }
+        
+        
+    }
+    
     func configureUI() {
         
         
