@@ -59,19 +59,20 @@ extension Show:TVSeries {
 extension TVMazeShow:TVSeries {
     var thumbnailPhoto: Data? {
         get {
-            return nil
+            return image?.mediumPhoto
         }
         set {
-            
+            print("setting tv struct thumbnail photo \(id)")
+            image?.mediumPhoto = newValue
         }
     }
     
     var detailPhoto: Data? {
         get {
-            return nil
+            return image?.originalPhoto
         }
         set {
-            
+            image?.originalPhoto = newValue
         }
     }
     
@@ -97,7 +98,7 @@ class TVCell:UITableViewCell {
     @IBOutlet weak var yearLabel: UILabel!
     
     var show:TVSeries! {
-        didSet{
+        didSet {
             configureUI()
         }
     }
@@ -113,7 +114,7 @@ class TVCell:UITableViewCell {
         subtitleLabel.text = show.genresList
         yearLabel.text = show.date
         thumbnailImage.image = UIImage(named: "placeholder")
-        if show.requiresFetching {
+        if show.thumbnailPhoto==nil,  show.requiresFetching {
             let captured = show
             if let url = captured?.thumbnailUrl {
                 TVMazeAPI.shared.getImage(urlString: url) { [weak self] data, error in
@@ -121,6 +122,7 @@ class TVCell:UITableViewCell {
                     guard error == nil else { return }
                     guard let data = data else { return }
                     guard captured?.showId == self?.show.showId else { print("too late. different"); return }
+                    self?.show.thumbnailPhoto = data
                     self?.thumbnailImage.image = UIImage(data: data)
                 }
             }

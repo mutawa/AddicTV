@@ -23,7 +23,7 @@ struct TVMazeShow:Codable {
     let name:String
     let language:String
     let genres:[String]
-    let image:TVMazeImage?
+    var image:TVMazeImage?
     let externals:TVMazeExternal
     let premiered:String?
     let summary:String
@@ -46,6 +46,9 @@ struct TVMazeImage:Codable {
     let medium:String
     
     let original:String
+    
+    var mediumPhoto:Data?
+    var originalPhoto:Data?
     
   
     enum codingKeys: String, CodingKey {

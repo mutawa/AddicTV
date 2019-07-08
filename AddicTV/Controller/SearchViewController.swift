@@ -39,8 +39,10 @@ class SearchViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier=="search details" else { return }
         guard let dvc = segue.destination as? ResultViewController else { return }
+        guard let detailShow = sender as? TVMazeShow else { fatalError("could not get details show") }
         
-        dvc.show = sender as? TVSeries
+        dvc.show = detailShow
+        
         
     }
     

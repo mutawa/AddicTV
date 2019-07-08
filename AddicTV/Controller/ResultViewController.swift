@@ -19,14 +19,12 @@ class ResultViewController: UIViewController {
     var show:TVSeries! {
         didSet {
             imageView?.image = nil
-            configureUI()
+            //configureUI()
         }
+        
     }
     
     @IBOutlet weak var imageView: UIImageView?
-    
-    
-    
     @IBOutlet weak var summaryTextField: UITextView!
     
     
@@ -50,21 +48,24 @@ class ResultViewController: UIViewController {
             }
         }
         
-        if imageView?.image == nil {
-            configureUI()
-        }
+        
         
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        if imageView?.image == nil {
+            configureUI()
+        }
+    }
     
     @objc func addToMyShows() {
         let newShow = Show(context: context)
         newShow.id = Int64(self.show.showId)
         newShow.name = self.show.title
         newShow.summary = self.show.synopses
-        newShow.thumbnail = self.imageView?.image?.pngData()
-        newShow.photo = self.imageView?.image?.pngData()
+        newShow.thumbnail = self.show.thumbnailPhoto
+        newShow.photo = self.show.detailPhoto
         
         newShow.genres = self.show.genresList
         newShow.releaseDate = self.show.date
@@ -86,9 +87,18 @@ class ResultViewController: UIViewController {
     }
     func configureUI() {
         
+        
+        
         // only start fetching when the view is visible to the user
         if view.window != nil {
             summaryTextField.text = show.synopses?.htmlToString
+            
+            if let imgData = show.detailPhoto {
+                self.imageView?.image = UIImage(data: imgData)
+                return
+            }
+            
+            
             
             if show.requiresFetching, let urlString = show.posterUrl {
                 TVMazeAPI.shared.getImage(urlString: urlString) { [weak self] data,error in
