@@ -34,7 +34,9 @@ In XCode, build and run by holding Command ⌘ + R
 # Requirements
 
 Xcode 10.2
+
 Swift 4.2
+
 iOS 12.0 +
 
 # License
