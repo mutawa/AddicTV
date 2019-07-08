@@ -11,7 +11,7 @@ import CoreData
 
 class SearchViewController: UIViewController {
     var searchResults = [TVMazeShow]()
-    var selectedShow:TVMazeShow?
+    
     var context:NSManagedObjectContext {
         return DataController.shared.context
     }
@@ -40,7 +40,8 @@ class SearchViewController: UIViewController {
         guard segue.identifier=="search details" else { return }
         guard let dvc = segue.destination as? ResultViewController else { return }
         
-        dvc.show = selectedShow
+        dvc.show = sender as? TVSeries
+        
     }
     
     
@@ -102,9 +103,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedShow = searchResults[indexPath.row]
+       
         
-        performSegue(withIdentifier: "search details", sender: nil)
+        performSegue(withIdentifier: "search details", sender: searchResults[indexPath.row])
         
     }
     

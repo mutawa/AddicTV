@@ -15,7 +15,8 @@ class ResultViewController: UIViewController {
     var context:NSManagedObjectContext {
         return DataController.shared.context
     }
-    var show:TVMazeShow! {
+    
+    var show:TVSeries! {
         didSet {
             imageView?.image = nil
             configureUI()
@@ -31,10 +32,13 @@ class ResultViewController: UIViewController {
     
     override func viewDidLoad() {
         configureUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         
         let fr:NSFetchRequest<Show> = Show.fetchRequest()
         let sd = NSSortDescriptor(key: "id", ascending: true)
-        let p = NSPredicate(format: "id == \(show.id)")
+        let p = NSPredicate(format: "id == \(show.showId)")
         fr.predicate = p
         
         fr.sortDescriptors = [sd]
@@ -46,25 +50,27 @@ class ResultViewController: UIViewController {
             }
         }
         
-        
-        
-
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
         if imageView?.image == nil {
             configureUI()
         }
+        
+        
     }
     
+    
     @objc func addToMyShows() {
-        let show = Show(context: context)
-        show.id = Int64(self.show.id)
-        show.name = self.show.name
-        show.summary = self.show.summary
-        show.photo = self.imageView?.image?.pngData()
+        let newShow = Show(context: context)
+        newShow.id = Int64(self.show.showId)
+        newShow.name = self.show.title
+        newShow.summary = self.show.synopses
+        newShow.thumbnail = self.imageView?.image?.pngData()
+        newShow.photo = self.imageView?.image?.pngData()
+        
+        newShow.genres = self.show.genresList
+        newShow.releaseDate = self.show.date
         
         // move this to a separate method
+        
         do {
             try context.save()
             navigationItem.rightBarButtonItem = nil
@@ -82,19 +88,51 @@ class ResultViewController: UIViewController {
         
         // only start fetching when the view is visible to the user
         if view.window != nil {
-            if let urlString = show.image?.urlMedium {
+            summaryTextField.text = show.synopses?.htmlToString
+            
+            if show.requiresFetching, let urlString = show.posterUrl {
                 TVMazeAPI.shared.getImage(urlString: urlString) { [weak self] data,error in
                     guard error==nil else { self?.imageView?.image = UIImage(named: "placeholder");  return }
                     guard let data=data else { return }
                     
+                    self?.show.detailPhoto = data
+                    
                     self?.imageView?.image = UIImage(data: data)
                 }
+            } else {
+                if let imgData = show.detailPhoto {
+                    self.imageView?.image = UIImage(data: imgData)
+                }
+                
             }
-            summaryTextField.text = show.summary
+            
+            
            
         }
        
 
     }
     
+}
+
+
+extension String {
+    var htmlToAttributedString: NSAttributedString? {
+        guard
+            let data = self.data(using: .utf8)
+            else { return nil }
+        do {
+            return try NSAttributedString(data: data, options: [
+                NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
+                NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue
+                ], documentAttributes: nil)
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return  nil
+        }
+    }
+    
+    var htmlToString: String {
+        return htmlToAttributedString?.string ?? ""
+    }
 }

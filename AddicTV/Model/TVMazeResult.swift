@@ -47,10 +47,7 @@ struct TVMazeImage:Codable {
     
     let original:String
     
-    var urlMedium:String {
-        return medium.replacingOccurrences(of: "http://", with: "https://", options: .literal, range: nil)
-        
-    }
+  
     enum codingKeys: String, CodingKey {
         case medium, original
     }

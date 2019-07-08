@@ -57,18 +57,32 @@ extension FavioritesViewController:UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TVCell else { return UITableViewCell() }
         
-        cell.textLabel?.text = favorites[indexPath.row].name
-        cell.detailTextLabel?.text = String(favorites[indexPath.row].id)
+        cell.show = favorites[indexPath.row]
         
-        cell.accessoryType = .disclosureIndicator
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        performSegue(withIdentifier: "show favorite", sender: favorites[indexPath.row])
+        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "show favorite" else { print("wrong segue"); return }
+        guard sender is TVSeries else { print("sender is not a tv series object"); return }
+        guard let svc = segue.destination as? ResultViewController else {print("wrong destination"); return}
+        
+        let show = sender as! TVSeries
+        svc.show = show
+        
+        
+        
+    }
     
 }
