@@ -8,55 +8,56 @@
 
 import Foundation
 
-class TVMazeAPI {
+class API {
     // singleton design pattern
-    static let shared = TVMazeAPI()
+    static let shared = API()
     private init() {}
     
-    static let baseUrl = "https://api.tvmaze.com/"
+    static let baseUrl = Constants.TVMaze.url
+    
     
     enum endPoint {
         case search(String)
-        case lookup(String)
         
         var urlString:String {
-            
             var url = baseUrl
             switch(self) {
             case .search(let query):
                 url += "search/shows?q=\(query.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil))"
-            case .lookup(let imdb):
-                url += "lookup/\(imdb)"
+            
             }
             return url
         }
     }
     
-    func search(for title:String, callback: (([TVMazeShow]?,String?)->())?=nil) {
+    func search(for title:String, callback: (([ApiShow]?,String?)->())?=nil) {
         let urlString = endPoint.search(title).urlString
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data,response,error in
-            guard error==nil else { callback?(nil,"Could not call API. \(error!.localizedDescription)\n\(url)"); return }
-            guard let data = data else { callback?(nil,"no data"); return }
-            
-            //print(String(bytes: data, encoding: .utf8)!)
-            
-            let decoder = JSONDecoder()
-            do {
-                let results = try decoder.decode([TVMazeResult].self, from: data)
-                var shows = [TVMazeShow]()
-                for result in results {
+            DispatchQueue.main.async {
+                guard error==nil else { callback?(nil,"Could not call API. \(error!.localizedDescription)\n\(url)"); return }
+                guard let data = data else { callback?(nil,"no data"); return }
+                
+                //print(String(bytes: data, encoding: .utf8)!)
+                
+                let decoder = JSONDecoder()
+                do {
+                    let results = try decoder.decode([ApiResult].self, from: data)
+                    var shows = [ApiShow]()
+                    for result in results {
+                        
+                        shows.append(result.show)
+                    }
                     
-                    shows.append(result.show)
-                }
-                DispatchQueue.main.async {
                     callback?(shows,nil)
+                    
+                    
+                    
+                } catch {
+                    callback?(nil, "error: \(error.localizedDescription)")
                 }
-                
-                
-            } catch {
-                callback?(nil, "error: \(error.localizedDescription)")
             }
+            
             
             
             

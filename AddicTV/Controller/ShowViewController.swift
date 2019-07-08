@@ -1,5 +1,5 @@
 //
-//  ResultViewController.swift
+//  ShowViewController
 //  AddicTV
 //
 //  Created by Ahmad Al-Mutawa on 07/07/2019.
@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class ResultViewController: UIViewController {
+class ShowViewController: UIViewController {
     
     var context:NSManagedObjectContext {
         return DataController.shared.context
@@ -101,7 +101,7 @@ class ResultViewController: UIViewController {
             
             
             if show.requiresFetching, let urlString = show.posterUrl {
-                TVMazeAPI.shared.getImage(urlString: urlString) { [weak self] data,error in
+                API.shared.getImage(urlString: urlString) { [weak self] data,error in
                     guard error==nil else { self?.imageView?.image = UIImage(named: "placeholder");  return }
                     guard let data=data else { return }
                     

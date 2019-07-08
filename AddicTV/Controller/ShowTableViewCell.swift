@@ -1,5 +1,5 @@
 //
-//  TVCell.swift
+//  ShowTableViewCell.swift
 //  AddicTV
 //
 //  Created by Ahmad Al-Mutawa on 7/4/19.
@@ -56,7 +56,7 @@ extension Show:TVSeries {
     var requiresFetching:Bool { return false }
 }
 
-extension TVMazeShow:TVSeries {
+extension ApiShow:TVSeries {
     var thumbnailPhoto: Data? {
         get {
             return image?.mediumPhoto
@@ -90,7 +90,7 @@ extension TVMazeShow:TVSeries {
     var requiresFetching:Bool { return true }
 }
 
-class TVCell:UITableViewCell {
+class ShowTableViewCell:UITableViewCell {
     
     @IBOutlet weak var thumbnailImage:UIImageView!
     @IBOutlet weak var titleLabel:UILabel!
@@ -123,7 +123,7 @@ class TVCell:UITableViewCell {
                 //print("\(show.title ?? "this show is") attempting fetching")
                 let captured = show
                 if let url = captured?.thumbnailUrl {
-                    TVMazeAPI.shared.getImage(urlString: url) { [weak self] data, error in
+                    API.shared.getImage(urlString: url) { [weak self] data, error in
                         
                         guard error == nil else { return }
                         guard let data = data else { return }

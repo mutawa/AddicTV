@@ -10,12 +10,13 @@ import UIKit
 import CoreData
 
 class SearchViewController: UIViewController {
-    var searchResults = [TVMazeShow]()
+    var searchResults = [ApiShow]()
     
     var context:NSManagedObjectContext {
         return DataController.shared.context
     }
     
+    @IBOutlet weak var spinner:UIActivityIndicatorView!
     @IBOutlet weak var tableView:UITableView!
     
     let searchController = UISearchController(searchResultsController: nil)
@@ -29,6 +30,10 @@ class SearchViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         self.navigationItem.hidesSearchBarWhenScrolling = false
         
+     
+        
+        
+        
 //        DispatchQueue.main.asyncAfter(deadline: .now()+3) {
 //            self.searchController.searchBar.placeholder = "Search any TV Show"
 //            self.searchController.searchBar.becomeFirstResponder()
@@ -38,25 +43,11 @@ class SearchViewController: UIViewController {
 //        }
 
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("will appear")
-        
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("will dis-appear")
-        self.searchController.searchBar.resignFirstResponder()
-        
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("did appear")
-    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier=="search details" else { return }
-        guard let dvc = segue.destination as? ResultViewController else { return }
-        guard let detailShow = sender as? TVMazeShow else { fatalError("could not get details show") }
+        guard let dvc = segue.destination as? ShowViewController else { return }
+        guard let detailShow = sender as? ApiShow else { fatalError("could not get details show") }
         
         dvc.show = detailShow
         
@@ -72,7 +63,9 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        TVMazeAPI.shared.search(for: searchText) { shows,errorString in
+        spinner.startAnimating()
+        API.shared.search(for: searchText) { shows,errorString in
+            self.spinner.stopAnimating()
             if errorString != nil {
                 print(errorString!)
             }
@@ -99,31 +92,38 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        return max(searchResults.count, 1)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TVCell else { return TVCell() }
         
-        cell.show = searchResults[indexPath.row]
+        
+        if searchResults.count>0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? ShowTableViewCell
+            cell?.show = searchResults[indexPath.row]
+            return cell!
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "placeholder")
+            //cell?.textLabel?.text = "Start by searching for a show"
+            return cell!
+        }
+        
         
     
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return searchResults.count>0 ? 80 : 160
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
-        let cell = tableView.cellForRow(at: indexPath) as! TVCell
+        let cell = tableView.cellForRow(at: indexPath) as! ShowTableViewCell
         
         
         performSegue(withIdentifier: "search details", sender: cell.show)
