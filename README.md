@@ -42,3 +42,5 @@ iOS 12.0 +
 # License
 
 MIT license
+
+Last modification: 17-Jul-2019
